@@ -1,4 +1,5 @@
 from typing import Optional
+import re
 
 __all__ = (
     'find_shortest_longest_word',
@@ -6,8 +7,8 @@ __all__ = (
 
 
 def find_shortest_longest_word(text: str) -> tuple[Optional[str], Optional[str]]:
-    """
-    В переданном тексте вернуть слово имеющее наименьшую и наибольшую длину.
-    Если такого слова нет - вернуть None
-    """
-    raise NotImplementedError
+    regex = re.compile(r'\w+')
+    words_len = regex.findall(text)
+    max_len = max(words_len, key=len, default=None)
+    min_len = min(words_len, key=len, default=None)
+    return min_len, max_len

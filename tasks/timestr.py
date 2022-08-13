@@ -4,16 +4,14 @@ __all__ = (
 
 
 def seconds_to_str(seconds: int) -> str:
-    """
-    Функция должна вернуть текстовое представление времени
-    20 -> 20s
-    60 -> 01m00s
-    65 -> 01m05s
-    3700 -> 01h01m40s
-    93600 -> 01d02h00m00s
-    """
-    raise NotImplementedError
-
-
-
-
+    dd = int(seconds) // (60 * 60 * 24)
+    hh = (seconds % (60 * 60 * 24)) // (60 * 60)
+    mm = (seconds % (60 * 60)) // 60
+    ss = f'{seconds % 60:02}s'
+    if dd:
+        return f'{dd:02}d{hh:02}h{mm:02}m' + ss
+    if hh:
+        return f'{hh:02}h{mm:02}m' + ss
+    if mm:
+        return f'{mm:02}m' + ss
+    return ss
